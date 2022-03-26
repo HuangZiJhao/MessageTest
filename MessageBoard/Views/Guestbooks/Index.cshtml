@@ -1,0 +1,100 @@
+﻿@model MessageBoard.ViewModels.GuestbooksViewModel
+
+@{
+  ViewBag.Title = "Index";
+}
+
+<div id="CreateData">
+  @Html.Action("Create")
+</div>
+<h2>留言板</h2>
+
+<table>
+  @if (Model.DataList.Count != 0)
+  {
+    foreach (var item in Model.DataList)
+    {
+      <tr>
+        <td>
+          @Html.DisplayNameFor(model => model.DataList[0].Name)
+        </td>
+        <td>
+          @item.Name
+        </td>
+      </tr>
+      <tr>
+        <td>
+          @Html.DisplayNameFor(model => model.DataList[0].CreateTime)
+        </td>
+        <td>
+          @item.CreateTime
+        </td>
+      </tr>
+      <tr>
+        <td>
+          @Html.DisplayNameFor(model => model.DataList[0].Content)
+        </td>
+        <td colspan="3">
+          @item.Content
+        </td>
+      </tr>
+      <tr>
+        <td>
+          @Html.DisplayNameFor(model => model.DataList[0].Reply)
+        </td>
+        <td colspan="3">
+          @item.Reply
+        </td>
+      </tr>
+      <tr>
+        <td>
+          @Html.DisplayNameFor(model => model.DataList[0].ReplyTime)
+        </td>
+        <td>
+          @item.ReplyTime
+        </td>
+      </tr>
+      <tr>
+        <td>
+          @Html.ActionLink("修改", "Edit", new { Id = item.Id })
+          @Html.ActionLink("回覆", "Reply", new { Id = item.Id })
+          @Html.ActionLink("刪除", "Delete", new { Id = item.Id })
+        </td>
+      </tr>
+    }
+
+  }
+  else
+  {
+    <tr>
+      <td colspan="4">
+        無資料
+      </td>
+    </tr>
+
+  }
+</table>
+@*@using (Html.BeginForm())
+    {
+
+        @using (Html.BeginForm())
+
+            <div class="form-horizontal">
+                <h4>GuestbooksViewModel</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+
+  }*@
+
+<div>
+  @Html.ActionLink("重新整理", "Index")
+</div>
+
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+}
